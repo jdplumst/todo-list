@@ -6,4 +6,18 @@ export default class Todo {
         this._priority = priority;
         this._notes = notes;
     };
+
+    getTodo() {
+        return this;
+    }
+
+    
+    // Only need for special purposes
+    // get title() {
+    //     return this._title;
+    // };
+
+    // set title(title) {
+    //     this._title = title;
+    // };
 };
