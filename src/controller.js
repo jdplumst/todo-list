@@ -1,10 +1,18 @@
 import Todo from "./todo";
 
 export default class Controller {
-    _todos = [];
+    constructor(view) {
+        this.view = view;
+    };
+    
+    #todos = [];
 
     addTodo(title) {
         let x = new Todo(title);
-        this._todos.push(x);
+        this.#todos.push(x);
+    };
+
+    displayTodos() {
+        view.displayTodos();
     };
 };
