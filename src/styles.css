@@ -2,3 +2,16 @@
 h1 {
     text-align: center;
 }
+
+/* Main Content */
+.container {
+    display: flex;
+}
+
+.projects {
+    width: 20%;
+}
+
+.tasks {
+    width: 80%;
+}
