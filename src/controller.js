@@ -1,18 +1,20 @@
 import Todo from "./todo";
+import Project from "./projects";
+import View from "./view";
 
 export default class Controller {
+    projects = [];
+    
     constructor(view) {
         this.view = view;
     };
-    
-    #todos = [];
 
-    addTodo(title) {
-        let x = new Todo(title);
-        this.#todos.push(x);
+    addProject(title) {
+        let x = new Project(title);
+        this.projects.push(x);
     };
 
-    displayTodos() {
-        view.displayTodos();
+    displayProjects() {
+        this.view.displayProjects(this.projects);
     };
 };

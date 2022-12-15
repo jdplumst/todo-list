@@ -1,7 +1,7 @@
 export default class View {
     constructor() {};
 
-    displayTodos(x) {
+    displayProjects(x) {
         console.log(x);
     };
 };

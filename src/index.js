@@ -4,5 +4,5 @@ import Controller from './controller';
 import View from './view';
 
 let app = new Controller(new View());
-app.addTodo('Coding Project');
-app.displayTodos();
+app.addProject('Coding Project');
+app.displayProjects();
