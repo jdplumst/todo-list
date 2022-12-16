@@ -46,6 +46,7 @@ select {
 }
 
 .item {
+    position: relative;
     border: 2px solid black;
     height: 200px;
     width: 200px;
@@ -53,6 +54,21 @@ select {
 
 p {
     text-align: center;
+}
+
+img {
+    position: absolute;
+    bottom: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.edit-task {
+    left: 10px;
+}
+
+.complete-task {
+    right: 10px;
 }
 
 /* Modal */

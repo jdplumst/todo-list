@@ -1,3 +1,6 @@
+import Pencil from './img/pencil.svg';
+import Check from './img/check-bold.svg';
+
 export default class View {
     constructor() {
         // Get DOM elements
@@ -17,6 +20,13 @@ export default class View {
         this.mediumPriorityField = this.getElement('#medium');
         this.highPriorityField = this.getElement('#high');
         this.notesField = this.getElement('#notes');
+
+        this.editTaskBtn = new Image();
+        this.editTaskBtn.src = Pencil;
+        this.editTaskBtn.classList.add('edit-task');
+        this.completeTaskBtn = new Image();
+        this.completeTaskBtn.src = Check;
+        this.completeTaskBtn.classList.add('complete-task');
     };
 
     // Get an element from DOM
@@ -85,6 +95,8 @@ export default class View {
             let todoItemDueDate = this.createElement('p');
             todoItemDueDate.innerText = todo.dueDate;
             todoItem.appendChild(todoItemDueDate);
+            todoItem.appendChild(this.editTaskBtn);
+            todoItem.appendChild(this.completeTaskBtn);
             this.tasksList.appendChild(todoItem);
         });
     }
