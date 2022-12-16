@@ -8,7 +8,7 @@ export default class Controller {
         this.view.projectBtn.addEventListener('click', () => {
             let projectName = this.view.getElement('input').value;
             if (projectName === '') return;
-            this.view.displayNewProject(projectName, 'p');
+            this.view.displayNewProject(projectName, 'option');
         });
     };
 };

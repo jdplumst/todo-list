@@ -1,7 +1,7 @@
 export default class View {
     constructor() {
         // Get DOM elements
-        this.projectsList = this.getElement('.projects-list');
+        this.projectsDropdown = this.getElement('select');
         this.projectBtn = this.getElement('button');
     };
 
@@ -24,6 +24,8 @@ export default class View {
     displayNewProject(title, tag, className='') {
         let project = this.createElement(tag, className);
         project.innerText = title;
-        this.projectsList.appendChild(project);
+        project.value = title;
+        this.projectsDropdown.appendChild(project);
+        project.selected = true;
     };
 };

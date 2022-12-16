@@ -15,3 +15,12 @@ h1 {
 .tasks {
     width: 80%;
 }
+
+/* Projects Sidebar */
+select {
+    width: 70%;
+}
+
+.projects-form {
+    margin-bottom: 20px;
+}
