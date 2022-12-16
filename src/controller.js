@@ -34,8 +34,8 @@ export default class Controller {
 
         // Create new todo in currently displayed project
         this.view.newTaskBtn.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent form from submitting
             let todoData = this.view.getTodo();
+            if (todoData[0] === '' || todoData[2] === '') return;
             let projectTitle = this.view.getElement('select').value;
             let project = this.getProject(projectTitle);
             // Create new todo
@@ -52,6 +52,7 @@ export default class Controller {
             todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             console.log(todos);
             this.view.displayTodos(todos);
+            event.preventDefault(); // Prevent form from submitting
         });
     };
 

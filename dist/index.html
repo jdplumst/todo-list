@@ -26,11 +26,7 @@
             <div class="tasks-tabs">
                 <button class="add-task">Add New Task</button>
             </div>
-            <div class="tasks-list">
-                <!-- <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div> -->
-            </div>
+            <div class="tasks-list"></div>
         </div>
     </div>
     <div class="modal">
@@ -39,7 +35,7 @@
             <form action="" method="get">
                 <div class="form-row">
                     <label for="title">Title</label>
-                    <input id="title" name="title" type="text">
+                    <input id="title" name="title" type="text" required>
                 </div>
                 <div class="form-row">
                     <label for="description">Description</label>
@@ -47,7 +43,7 @@
                 </div>
                 <div class="form-row">
                     <label for="dueDate">Due Date</label>
-                    <input id="dueDate" name="dueDate" type="date">
+                    <input id="dueDate" name="dueDate" type="date" required>
                 </div>
                 <fieldset>
                     <legend>Priority</legend>
@@ -73,7 +69,7 @@
                     <textarea id="notes" name="notes"></textarea>
                 </div>
                 <div class="form-row">
-                    <button class="new-task">Submit</button>
+                    <input type="submit" class="new-task"></button>
                 </div>
             </form>
         </div>
