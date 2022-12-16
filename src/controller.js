@@ -16,7 +16,6 @@ export default class Controller {
             this.view.displayNewProject(projectTitle, 'option');
             let project = new Project(projectTitle);
             this.projects.push(project);
-            console.log(this.projects);
         });
 
         // Delete currently displayed project when delete project button clicked
@@ -27,13 +26,34 @@ export default class Controller {
             this.view.deleteElement(`option.${CSS.escape(classProjectTitle)}`);
             this.projects = this.projects.filter(project => project.title !== projectTitle);
         });
+
+        // Display form to create new todo
+        this.view.addTaskBtn.addEventListener('click', () => {
+            this.view.displayNewModal();
+        });
+
+        // Create new todo
+        this.view.newTaskBtn.addEventListener('click', () => {
+            // GET VALUE FROM EACH FORM ELEMENT
+            // ADD TO THIS.TASKS IN PROJECTS.JS, MAKE SURE CORRECT PROJECT
+            // let project = this.getProject(projectTitle);
+            // project.addTodo(title, description, dueDate, priority, notes);
+        });
     };
 
-    // Returns true if there already exists a project with a specific title
+    // Returns true if there exists a project with projectTitle as its title
     projectExists(projectTitle) {
         for (let i = 0; i < this.projects.length; i++) {
             if (this.projects[i].title === projectTitle) return true;
         }
         return false;
     };
+
+    // Returns the project with projectTitle as its title
+    getProject(projectTitle) {
+        for (let i = 0; i < this.projects.length; i++) {
+            if (this.projects[i].title === projectTitle) return this.projects[i];
+        }
+        return false;
+    }
 };

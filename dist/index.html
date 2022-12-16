@@ -33,5 +33,50 @@
             </div>
         </div>
     </div>
+    <div class="modal-new">
+        <div class="modal-content">
+            <h2>Add New Task</h2>
+            <form action="" method="get">
+                <div class="form-row">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text">
+                </div>
+                <div class="form-row">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="dueDate">Due Date</label>
+                    <input id="dueDate" name="dueDate" type="date">
+                </div>
+                <fieldset>
+                    <legend>Priority</legend>
+                    <input id="low"
+                           name="priority"
+                           type="radio"
+                           value="low"
+                           checked>
+                    <label for="low">Low</label>
+                    <input id="medium"
+                           name="priority"
+                           type="radio"
+                           value="medium">
+                    <label for="medium">Medium</label>
+                    <input id="high"
+                           name="priority"
+                           type="radio"
+                           value="high">
+                    <label for="high">High</label>
+                </fieldset>
+                <div class="form-row">
+                    <label for="Notes">Notes</label>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+                <div class="form-row">
+                    <button class="new-task">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

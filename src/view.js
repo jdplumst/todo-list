@@ -4,6 +4,10 @@ export default class View {
         this.projectsDropdown = this.getElement('select');
         this.addProjectBtn = this.getElement('.add-project');
         this.deleteProjectBtn = this.getElement('.delete-project');
+        this.addTaskBtn = this.getElement('.add-task');
+        this.modalNew = this.getElement('.modal-new');
+        this.modalContent = this.getElement('.modal-content');
+        this.newTaskBtn = this.getElement('.new-task');
     };
 
     // Get an element from DOM
@@ -36,5 +40,10 @@ export default class View {
         project.classList.add(title);
         this.projectsDropdown.appendChild(project);
         project.selected = true;
+    };
+
+    // Displays modal for new todo
+    displayNewModal() {
+        this.modalNew.style.display = 'block';
     };
 };

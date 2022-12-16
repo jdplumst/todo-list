@@ -39,7 +39,6 @@ select {
     grid-template-columns: repeat(auto-fit, 200px);
     grid-template-rows: repeat(auto-fit, 200px);
     gap: 10px;
-    /* row-gap: px; */
     height: 100%;
 }
 
@@ -47,4 +46,92 @@ select {
     border: 2px solid black;
     height: 200px;
     width: 200px;
+}
+
+/* Modal */
+.modal-new {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 150px auto;
+    border: 1px solid grey;
+    width: 50%;
+    height: 50%;
+}
+
+h2 {
+    text-align: center;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.form-row input,
+.form-row textarea {
+    border: 1px solid black;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 7px;
+    width: 70%;
+}   
+
+.form-row label,
+legend {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.form-row label {
+    margin-top: 7px;
+    margin-right: 10px;
+}
+
+fieldset {
+    border: none;
+}
+
+fieldset label,
+fieldset input,
+legend {
+    margin-bottom: 10px;
+}
+
+fieldset label,
+fieldset input {
+    display: inline-block;
+    margin-top: 0px;
+}
+
+fieldset label {
+    margin-right: 20px;
+}
+
+fieldset input {
+    margin-left: 10px;
+}
+
+legend {
+    float: left;
+    margin-left: 7px;
+}
+
+.form-row button {
+    margin-left: auto;
+    margin-right: auto;
 }
