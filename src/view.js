@@ -5,9 +5,17 @@ export default class View {
         this.addProjectBtn = this.getElement('.add-project');
         this.deleteProjectBtn = this.getElement('.delete-project');
         this.addTaskBtn = this.getElement('.add-task');
-        this.modalNew = this.getElement('.modal-new');
+        this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
         this.newTaskBtn = this.getElement('.new-task');
+
+        this.titleField = this.getElement('#title');
+        this.descriptionField = this.getElement('#description');
+        this.dueDateField = this.getElement('#dueDate');
+        this.lowPriorityField = this.getElement('#low');
+        this.mediumPriorityField = this.getElement('#medium');
+        this.highPriorityField = this.getElement('#high');
+        this.notesField = this.getElement('#notes');
     };
 
     // Get an element from DOM
@@ -42,8 +50,25 @@ export default class View {
         project.selected = true;
     };
 
-    // Displays modal for new todo
-    displayNewModal() {
-        this.modalNew.style.display = 'block';
+    // Displays modal for todo
+    displayModal() {
+        this.modal.style.display = 'block';
     };
+
+    // Hides todo modal
+    hideModal() {
+        this.modal.style.display = 'none';
+    }
+
+    // Retrieves data from todo form
+    getTodo() {
+        let todoData = [this.titleField.value, 
+            this.descriptionField.value, 
+            this.dueDateField.value,
+            this.lowPriorityField.checked, 
+            this.mediumPriorityField.checked, 
+            this.highPriorityField.checked,
+            this.notesField.value];
+        return todoData;
+    }
 };

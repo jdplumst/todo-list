@@ -29,15 +29,26 @@ export default class Controller {
 
         // Display form to create new todo
         this.view.addTaskBtn.addEventListener('click', () => {
-            this.view.displayNewModal();
+            this.view.displayModal();
         });
 
-        // Create new todo
-        this.view.newTaskBtn.addEventListener('click', () => {
-            // GET VALUE FROM EACH FORM ELEMENT
-            // ADD TO THIS.TASKS IN PROJECTS.JS, MAKE SURE CORRECT PROJECT
-            // let project = this.getProject(projectTitle);
-            // project.addTodo(title, description, dueDate, priority, notes);
+        // Create new todo in currently displayed project
+        this.view.newTaskBtn.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent form from submitting
+            let todoData = this.view.getTodo();
+            let projectTitle = this.view.getElement('select').value;
+            let project = this.getProject(projectTitle);
+            console.log(project);
+            console.log(todoData);
+            if (todoData[3]) {
+                project.addTodo(todoData[0], todoData[1], todoData[2], 'low', todoData[6]);
+            } else if (todoData[4]) {
+                project.addTodo(todoData[0], todoData[1], todoData[2], 'medium', todoData[6]);
+            } else if (todoData[5]) {
+                project.addTodo(todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
+            }
+            console.log(project);
+            this.view.hideModal();
         });
     };
 

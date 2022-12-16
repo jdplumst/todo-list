@@ -49,7 +49,7 @@ select {
 }
 
 /* Modal */
-.modal-new {
+.modal {
     display: none;
     position: fixed;
     z-index: 1;
