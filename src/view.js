@@ -8,6 +8,7 @@ export default class View {
         this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
         this.newTaskBtn = this.getElement('.new-task');
+        this.tasksList = this.getElement('.tasks-list');
 
         this.titleField = this.getElement('#title');
         this.descriptionField = this.getElement('#description');
@@ -70,5 +71,20 @@ export default class View {
             this.highPriorityField.checked,
             this.notesField.value];
         return todoData;
+    }
+
+    // Displays todos in grid
+    displayTodos(todos) {
+        this.tasksList.innerHTML = '';
+        todos.forEach(todo => {
+            let todoItem = this.createElement('div', 'item');
+            let todoItemTitle = this.createElement('h2');
+            todoItemTitle.innerText = todo.title;
+            todoItem.appendChild(todoItemTitle);
+            let todoItemDueDate = this.createElement('p');
+            todoItemDueDate.innerText = todo.dueDate;
+            todoItem.appendChild(todoItemDueDate);
+            this.tasksList.appendChild(todoItem);
+        });
     }
 };

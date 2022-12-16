@@ -38,8 +38,7 @@ export default class Controller {
             let todoData = this.view.getTodo();
             let projectTitle = this.view.getElement('select').value;
             let project = this.getProject(projectTitle);
-            console.log(project);
-            console.log(todoData);
+            // Create new todo
             if (todoData[3]) {
                 project.addTodo(todoData[0], todoData[1], todoData[2], 'low', todoData[6]);
             } else if (todoData[4]) {
@@ -47,8 +46,12 @@ export default class Controller {
             } else if (todoData[5]) {
                 project.addTodo(todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
             }
-            console.log(project);
             this.view.hideModal();
+            // Get list of todos for currently displayed project and sort them by date
+            let todos = project.getTodos();
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
+            console.log(todos);
+            this.view.displayTodos(todos);
         });
     };
 

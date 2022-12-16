@@ -40,12 +40,19 @@ select {
     grid-template-rows: repeat(auto-fit, 200px);
     gap: 10px;
     height: 100%;
+    /* width: 850px; */
+    border: 2px solid black;
+    padding: 5px;
 }
 
 .item {
     border: 2px solid black;
     height: 200px;
     width: 200px;
+}
+
+p {
+    text-align: center;
 }
 
 /* Modal */

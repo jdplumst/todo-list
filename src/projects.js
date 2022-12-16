@@ -10,4 +10,8 @@ export default class Project {
         let task = new Todo(title, description, dueDate, priority, notes);
         this.todos.push(task);
     };
+
+    getTodos() {
+        return this.todos;
+    };
 };
