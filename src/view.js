@@ -78,6 +78,7 @@ export default class View {
         this.tasksList.innerHTML = '';
         todos.forEach(todo => {
             let todoItem = this.createElement('div', 'item');
+            todoItem.setAttribute('todo-id', todo.id);
             let todoItemTitle = this.createElement('h2');
             todoItemTitle.innerText = todo.title;
             todoItem.appendChild(todoItemTitle);
