@@ -38,4 +38,14 @@ export default class Project {
         todo.priority = priority;
         todo.notes = notes;
     };
+
+    // Set todo with specific id to have completed property switched
+    completeTodo(id) {
+        let todo = this.getTodo(id);
+        if (todo.completed === true) {
+            todo.completed = false;
+        } else {
+            todo.completed = true;
+        }
+    };
 };

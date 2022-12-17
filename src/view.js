@@ -143,6 +143,11 @@ export default class View {
             } else if (todo.priority === 'high') {
                 todoItem.style.backgroundColor = '#ef4444';
             }
+            if (todo.completed === true) {
+                todoItem.style.opacity = '0.5';
+            } else if (todo.completed === false) {
+                todoItem.style.opacity = '1';
+            }
             this.tasksList.appendChild(todoItem);
         });
     };

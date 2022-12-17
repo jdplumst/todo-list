@@ -81,6 +81,7 @@ export default class Controller {
             event.preventDefault(); // Prevent form from submitting
         });
 
+        // Event listener for dynamic elements
         document.addEventListener('click', (event) => {
             let target = event.target;
             // Display todo list for selected project
@@ -96,6 +97,13 @@ export default class Controller {
                 let project = this.getProject(projectTitle);
                 let todo = project.getTodo(todoId);
                 this.view.displayEditModal(todo);
+            } else if (target.className === 'complete-task') {
+                let todoId = target.parentNode.getAttribute('todo-id');
+                let projectTitle = this.view.getElement('select').value;
+                let project = this.getProject(projectTitle);
+                project.completeTodo(todoId);
+                let todos = project.getTodos();
+                this.view.displayTodos(todos);
             }
         });
     };
