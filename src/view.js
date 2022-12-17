@@ -10,8 +10,6 @@ export default class View {
         this.addTaskBtn = this.getElement('.add-task');
         this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
-        this.newTaskBtn = this.getElement('.new-task-submit');
-        this.editTaskBtn = this.getElement('.edit-task-submit');
         this.tasksList = this.getElement('.tasks-list');
 
         this.titleField = this.getElement('#title');

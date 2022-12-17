@@ -16,6 +16,8 @@ export default class Controller {
             this.view.displayNewProject(projectTitle, 'option');
             let project = new Project(projectTitle);
             this.projects.push(project);
+            let todos = project.getTodos();
+            this.view.displayTodos(todos);
         });
 
         // Delete currently displayed project when delete project button clicked
