@@ -63,6 +63,11 @@ img {
     height: 30px;
 }
 
+.edit-task,
+.complete-task {
+    cursor: pointer;
+}
+
 .edit-task {
     left: 10px;
 }
