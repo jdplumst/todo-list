@@ -35,6 +35,11 @@ export default class Controller {
             this.view.displayNewModal();
         });
 
+        // Close todo form
+        this.view.closeBtn.addEventListener('click', () => {
+            this.view.hideModal();
+        });
+
         // Create new todo item or edit exising todo item
         this.view.submitBtn.addEventListener('click', (event) => {
             let todoData = this.view.getTodo();

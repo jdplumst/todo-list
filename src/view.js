@@ -22,6 +22,7 @@ export default class View {
         this.notesField = this.getElement('#notes');
         this.idField = this.getElement('#todo-id');
         this.submitBtn = this.getElement('input[type=submit]');
+        this.closeBtn = this.getElement('.close');
 
         this.projectOptions = document.querySelectorAll('option');
     };
