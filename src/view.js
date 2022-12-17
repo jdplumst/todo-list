@@ -10,7 +10,8 @@ export default class View {
         this.addTaskBtn = this.getElement('.add-task');
         this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
-        this.newTaskBtn = this.getElement('.new-task');
+        this.newTaskBtn = this.getElement('.new-task-submit');
+        this.editTaskBtn = this.getElement('.edit-task-submit');
         this.tasksList = this.getElement('.tasks-list');
 
         this.titleField = this.getElement('#title');
@@ -20,13 +21,8 @@ export default class View {
         this.mediumPriorityField = this.getElement('#medium');
         this.highPriorityField = this.getElement('#high');
         this.notesField = this.getElement('#notes');
-
-        this.editTaskBtn = new Image();
-        this.editTaskBtn.src = Pencil;
-        this.editTaskBtn.classList.add('edit-task');
-        this.completeTaskBtn = new Image();
-        this.completeTaskBtn.src = Check;
-        this.completeTaskBtn.classList.add('complete-task');
+        this.idField = this.getElement('#todo-id');
+        this.submitBtn = this.getElement('input[type=submit]');
     };
 
     // Get an element from DOM
@@ -48,7 +44,7 @@ export default class View {
     deleteElement(selector) {
         const element = document.querySelector(selector);
         element.remove();
-    }
+    };
 
     // Display New Project
     displayNewProject(title, tag, className='') {
@@ -61,15 +57,44 @@ export default class View {
         project.selected = true;
     };
 
-    // Displays modal for todo
-    displayModal() {
+    // Displays modal for todo to add
+    displayNewModal() {
         this.modal.style.display = 'block';
+        this.submitBtn.classList.remove('edit-task-submit');
+        this.submitBtn.classList.add('new-task-submit');
+        this.titleField.value = '';
+        this.descriptionField.value = '';
+        this.dueDateField.value = '';
+        this.lowPriorityField.checked = true;
+        this.mediumPriorityField.checked = false;
+        this.highPriorityField.checked = false;
+        this.notesField.value = '';
+        this.idField.value = '';
     };
 
     // Hides todo modal
     hideModal() {
         this.modal.style.display = 'none';
-    }
+    };
+
+    // Displays modal for todo to edit
+    displayEditModal(todo) {
+        this.modal.style.display = 'block';
+        this.submitBtn.classList.add('edit-task-submit');
+        this.submitBtn.classList.remove('new-task-submit');
+        this.titleField.value = todo.title;
+        this.descriptionField.value = todo.description;
+        this.dueDateField.value = todo.dueDate;
+        if (todo.priority === 'low') {
+            this.lowPriorityField.checked = true;
+        } else if (todo.priority === 'medium') {
+            this.mediumPriorityField.checked = true;
+        } else if (todo.priority === 'high') {
+            this.highPriorityField.checked = true;
+        }
+        this.notesField.value = todo.notes;
+        this.idField.value = todo.id;
+    };
 
     // Retrieves data from todo form
     getTodo() {
@@ -79,9 +104,10 @@ export default class View {
             this.lowPriorityField.checked, 
             this.mediumPriorityField.checked, 
             this.highPriorityField.checked,
-            this.notesField.value];
+            this.notesField.value,
+            this.idField.value];
         return todoData;
-    }
+    };
 
     // Displays todos in grid
     displayTodos(todos) {
@@ -95,9 +121,15 @@ export default class View {
             let todoItemDueDate = this.createElement('p');
             todoItemDueDate.innerText = todo.dueDate;
             todoItem.appendChild(todoItemDueDate);
+            this.editTaskBtn = new Image();
+            this.editTaskBtn.src = Pencil;
+            this.editTaskBtn.classList.add('edit-task');
             todoItem.appendChild(this.editTaskBtn);
+            this.completeTaskBtn = new Image();
+            this.completeTaskBtn.src = Check;
+            this.completeTaskBtn.classList.add('complete-task');
             todoItem.appendChild(this.completeTaskBtn);
             this.tasksList.appendChild(todoItem);
         });
-    }
+    };
 };

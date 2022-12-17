@@ -29,30 +29,55 @@ export default class Controller {
 
         // Display form to create new todo
         this.view.addTaskBtn.addEventListener('click', () => {
-            this.view.displayModal();
+            this.view.displayNewModal();
         });
 
-        // Create new todo in currently displayed project
-        this.view.newTaskBtn.addEventListener('click', (event) => {
+        // Create new todo item or edit exising todo item
+        this.view.submitBtn.addEventListener('click', (event) => {
             let todoData = this.view.getTodo();
             if (todoData[0] === '' || todoData[2] === '') return;
             let projectTitle = this.view.getElement('select').value;
             let project = this.getProject(projectTitle);
-            // Create new todo
-            if (todoData[3]) {
-                project.addTodo(todoData[0], todoData[1], todoData[2], 'low', todoData[6]);
-            } else if (todoData[4]) {
-                project.addTodo(todoData[0], todoData[1], todoData[2], 'medium', todoData[6]);
-            } else if (todoData[5]) {
-                project.addTodo(todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
+            // Create new todo in currently displayed project
+            if (event.target.className === 'new-task-submit') {
+                // Create new todo
+                if (todoData[3]) {
+                    project.addTodo(todoData[0], todoData[1], todoData[2], 'low', todoData[6]);
+                } else if (todoData[4]) {
+                    project.addTodo(todoData[0], todoData[1], todoData[2], 'medium', todoData[6]);
+                } else if (todoData[5]) {
+                    project.addTodo(todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
+                }
+                
+            // Edit existing todo item
+            } else if (event.target.className === 'edit-task-submit') {
+                if (todoData[3]) {
+                    project.editTodo(todoData[7], todoData[0], todoData[1], todoData[2], 'low', todoData[6]);
+                } else if (todoData[4]) {
+                    project.editTodo(todoData[7], todoData[0], todoData[1], todoData[2], 'medium', todoData[6]);
+                } else if (todoData[5]) {
+                    project.editTodo(todoData[7], todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
+                }
             }
             this.view.hideModal();
             // Get list of todos for currently displayed project and sort them by date
             let todos = project.getTodos();
             todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
-            console.log(todos);
             this.view.displayTodos(todos);
+            console.log(todos);
             event.preventDefault(); // Prevent form from submitting
+        });
+
+        // Display form to edit todo
+        document.addEventListener('click', (event) => {
+            let target = event.target;
+            if (target.className === 'edit-task') {
+                let todoId = target.parentNode.getAttribute('todo-id');
+                let projectTitle = this.view.getElement('select').value;
+                let project = this.getProject(projectTitle);
+                let todo = project.getTodo(todoId);
+                this.view.displayEditModal(todo);
+            }
         });
     };
 

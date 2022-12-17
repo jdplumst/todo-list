@@ -154,7 +154,8 @@ legend {
     margin-left: 7px;
 }
 
-.new-task {
+.new-task-submit,
+.edit-task-submit {
     margin-left: auto;
     margin-right: auto;
 }

@@ -22,7 +22,7 @@ export default class Project {
     // Return single todo with specific id
     getTodo(id) {
         for(let i = 0; i < this.todos.length; i++) {
-            if (this.todos[i].id === id) {
+            if (this.todos[i].id == id) {
                 return this.todos[i];
             }
         }
