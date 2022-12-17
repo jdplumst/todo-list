@@ -4,6 +4,7 @@ import Check from './img/check-bold.svg';
 export default class View {
     constructor() {
         // Get DOM elements
+        this.projectsInput = this.getElement('.projects-input');
         this.projectsDropdown = this.getElement('select');
         this.addProjectBtn = this.getElement('.add-project');
         this.deleteProjectBtn = this.getElement('.delete-project');
@@ -44,6 +45,11 @@ export default class View {
     deleteElement(selector) {
         const element = document.querySelector(selector);
         element.remove();
+    };
+
+    // Clear project name input
+    clearProjectInput() {
+        this.projectsInput.value = '';
     };
 
     // Display New Project

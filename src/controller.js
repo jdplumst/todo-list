@@ -17,6 +17,7 @@ export default class Controller {
             let project = new Project(projectTitle);
             this.projects.push(project);
             let todos = project.getTodos();
+            this.view.clearProjectInput();
             this.view.displayTodos(todos);
         });
 
