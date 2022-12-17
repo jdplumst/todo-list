@@ -70,10 +70,16 @@ export default class Controller {
             event.preventDefault(); // Prevent form from submitting
         });
 
-        // Display form to edit todo
         document.addEventListener('click', (event) => {
             let target = event.target;
-            if (target.className === 'edit-task') {
+            // Display todo list for selected project
+            if (target.tagName === 'SELECT') {
+                let projectTitle = this.view.getElement('select').value;
+                let project = this.getProject(projectTitle);
+                let todos = project.getTodos();
+                this.view.displayTodos(todos);
+            // Display form to edit todo
+            } else if (target.className === 'edit-task') {
                 let todoId = target.parentNode.getAttribute('todo-id');
                 let projectTitle = this.view.getElement('select').value;
                 let project = this.getProject(projectTitle);
