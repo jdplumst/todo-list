@@ -129,6 +129,13 @@ export default class View {
             this.completeTaskBtn.src = Check;
             this.completeTaskBtn.classList.add('complete-task');
             todoItem.appendChild(this.completeTaskBtn);
+            if (todo.priority === 'low') {
+                todoItem.style.backgroundColor = '#22c55e';
+            } else if (todo.priority === 'medium') {
+                todoItem.style.backgroundColor = '#f97316';
+            } else if (todo.priority === 'high') {
+                todoItem.style.backgroundColor = '#ef4444';
+            }
             this.tasksList.appendChild(todoItem);
         });
     };
