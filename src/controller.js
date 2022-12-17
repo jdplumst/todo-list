@@ -32,6 +32,11 @@ export default class Controller {
 
         // Display form to create new todo
         this.view.addTaskBtn.addEventListener('click', () => {
+            let projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') {
+                alert('Must have a project selected!');
+                return;
+            }
             this.view.displayNewModal();
         });
 
