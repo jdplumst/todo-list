@@ -39,6 +39,11 @@ export default class Project {
         todo.notes = notes;
     };
 
+    // Delete todo with specific id
+    deleteTodo(id) {
+        this.todos = this.todos.filter(todo => todo.id != id);
+    };
+
     // Set todo with specific id to have completed property switched
     completeTodo(id) {
         let todo = this.getTodo(id);

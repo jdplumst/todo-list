@@ -112,7 +112,7 @@ select {
     grid-template-rows: repeat(auto-fit, 200px);
     gap: 10px;
     height: 100%;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     padding: 5px;
 }
 
@@ -135,7 +135,8 @@ img {
 }
 
 .edit-task,
-.complete-task {
+.complete-task,
+.delete-task {
     cursor: pointer;
 }
 
@@ -144,6 +145,11 @@ img {
 }
 
 .complete-task {
+    left: 50%;
+    transform: translate(-50%, 0)
+}
+
+.delete-task {
     right: 10px;
 }
 

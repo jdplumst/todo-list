@@ -1,5 +1,6 @@
 import Pencil from './img/pencil.svg';
 import Check from './img/check-bold.svg';
+import Delete from './img/delete.svg';
 
 export default class View {
     constructor() {
@@ -168,6 +169,10 @@ export default class View {
             this.completeTaskBtn.src = Check;
             this.completeTaskBtn.classList.add('complete-task');
             todoItem.appendChild(this.completeTaskBtn);
+            this.deleteTaskBtn = new Image();
+            this.deleteTaskBtn.src = Delete;
+            this.deleteTaskBtn.classList.add('delete-task');
+            todoItem.appendChild(this.deleteTaskBtn);
             if (todo.priority === 'low') {
                 todoItem.style.backgroundColor = '#22c55e';
             } else if (todo.priority === 'medium') {
