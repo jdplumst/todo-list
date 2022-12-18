@@ -6,6 +6,10 @@ body {
     background-color: #c7d2fe;
 }
 
+button {
+    font-size: 16px;
+}
+
 /* Header */
 h1 {
     text-align: center;
@@ -54,6 +58,7 @@ select {
 
 .projects-input {
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 .add-project {
@@ -66,6 +71,10 @@ select {
     background-color: #ef4444;
     color: white;
     border: 1px solid #ef4444;
+}
+
+select {
+    font-size: 16px;
 }
 
 /* Tasks Grid */
@@ -93,7 +102,8 @@ select {
 }
 
 .checkbox-label {
-    margin-left: 30px;
+    float: right;
+    margin-right: 30px;
 }
 
 .tasks-list {
@@ -102,7 +112,6 @@ select {
     grid-template-rows: repeat(auto-fit, 200px);
     gap: 10px;
     height: 100%;
-    /* width: 850px; */
     border: 2px solid black;
     padding: 5px;
 }
