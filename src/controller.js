@@ -3,6 +3,7 @@ import Project from "./projects";
 export default class Controller {
     constructor(view) {
         this.view = view;
+        this.time = 'all';
         this.projects = [];
         
         // Create new project when new project button is clicked
@@ -18,7 +19,7 @@ export default class Controller {
             this.projects.push(project);
             let todos = project.getTodos();
             this.view.clearProjectInput();
-            this.view.displayTodos(todos);
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
         });
 
         // Delete currently displayed project when delete project button clicked
@@ -76,9 +77,48 @@ export default class Controller {
             // Get list of todos for currently displayed project and sort them by date
             let todos = project.getTodos();
             todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
-            this.view.displayTodos(todos);
-            console.log(todos);
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             event.preventDefault(); // Prevent form from submitting
+        });
+
+        // Set to show all todos when Show All button is clicked
+        this.view.showAllBtn.addEventListener('click', () => {
+            this.time = 'all';
+            let projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') return;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
+        });
+
+        // Set to show todos due this week when Show This Week button is clicked
+        this.view.showWeekBtn.addEventListener('click', () => {
+            this.time = 'week';
+            let projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') return;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
+        });
+
+        // Set to show todos due this month when Show This Month button is clicked
+        this.view.showMonthBtn.addEventListener('click', () => {
+            this.time = 'month';
+            let projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') return;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
+        });
+
+        // Set to show todos due this week when Show This Year button is clicked
+        this.view.showYearBtn.addEventListener('click', () => {
+            this.time = 'year';
+            let projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') return;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
         // Refresh todo list when the show completed tasks checkbox is clicked
@@ -86,7 +126,7 @@ export default class Controller {
             let projectTitle = this.view.getElement('select').value;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
-            this.view.displayTodos(todos); 
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
         // Event listener for dynamic elements
@@ -97,7 +137,7 @@ export default class Controller {
                 let projectTitle = this.view.getElement('select').value;
                 let project = this.getProject(projectTitle);
                 let todos = project.getTodos();
-                this.view.displayTodos(todos);
+                this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             // Display form to edit todo
             } else if (target.className === 'edit-task') {
                 let todoId = target.parentNode.getAttribute('todo-id');
@@ -111,7 +151,7 @@ export default class Controller {
                 let project = this.getProject(projectTitle);
                 project.completeTodo(todoId);
                 let todos = project.getTodos();
-                this.view.displayTodos(todos);
+                this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             }
         });
     };
@@ -130,5 +170,26 @@ export default class Controller {
             if (this.projects[i].title === projectTitle) return this.projects[i];
         }
         return false;
-    }
+    };
+
+    // Returns list of todos filtered by time frame (week, month, or year)
+    getFilteredTodoDates(todos,time) {
+        if (time === 'all') {
+            return todos;
+        }
+        let today = new Date();
+        today.setHours(0,0,0,0);
+        let end = new Date();
+        end.setHours(0,0,0,0);
+        if (time === 'week') {
+            end.setDate(today.getDate() + 7);
+        } else if (time === 'month') {
+            end.setDate(today.getDate() + 30);
+        } else if (time === 'year') {
+            end.setDate(today.getDate() + 365);
+        }
+        today = today.toISOString().substring(0,10);
+        end = end.toISOString().substring(0,10);
+        return todos.filter(todo => todo.dueDate >= today && todo.dueDate <= end);
+    };
 };

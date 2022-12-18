@@ -9,6 +9,10 @@ export default class View {
         this.addProjectBtn = this.getElement('.add-project');
         this.deleteProjectBtn = this.getElement('.delete-project');
         this.addTaskBtn = this.getElement('.add-task');
+        this.showAllBtn = this.getElement('.show-all');
+        this.showWeekBtn = this.getElement('.show-week');
+        this.showMonthBtn = this.getElement('.show-month');
+        this.showYearBtn = this.getElement('.show-year');
         this.showCompletedCheckbox = this.getElement('#show-completed');
         this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
