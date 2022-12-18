@@ -81,6 +81,14 @@ export default class Controller {
             event.preventDefault(); // Prevent form from submitting
         });
 
+        // Refresh todo list when the show completed tasks checkbox is clicked
+        this.view.showCompletedCheckbox.addEventListener('click', () => {
+            let projectTitle = this.view.getElement('select').value;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            this.view.displayTodos(todos); 
+        });
+
         // Event listener for dynamic elements
         document.addEventListener('click', (event) => {
             let target = event.target;

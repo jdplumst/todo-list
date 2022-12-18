@@ -9,6 +9,7 @@ export default class View {
         this.addProjectBtn = this.getElement('.add-project');
         this.deleteProjectBtn = this.getElement('.delete-project');
         this.addTaskBtn = this.getElement('.add-task');
+        this.showCompletedCheckbox = this.getElement('#show-completed');
         this.modal = this.getElement('.modal');
         this.modalContent = this.getElement('.modal-content');
         this.tasksList = this.getElement('.tasks-list');
@@ -119,6 +120,9 @@ export default class View {
     // Displays todos in grid
     displayTodos(todos) {
         this.tasksList.innerHTML = '';
+        if (this.showCompletedCheckbox.checked === false) {
+            todos = todos.filter(todo => todo.completed === false);
+        }
         todos.forEach(todo => {
             let todoItem = this.createElement('div', 'item');
             todoItem.setAttribute('todo-id', todo.id);
