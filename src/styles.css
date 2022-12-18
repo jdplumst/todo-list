@@ -19,7 +19,6 @@ h1 {
 /* Main Content */
 .container {
     display: flex;
-    height: 80vh;
 }
 
 .projects {
