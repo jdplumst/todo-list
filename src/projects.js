@@ -8,8 +8,8 @@ export default class Project {
     };
 
     // Add new todo to project
-    addTodo(title, description, dueDate, priority, notes) {
-        let task = new Todo(this.currentId, title, description, dueDate, priority, notes);
+    addTodo(title, description, dueDate, priority, notes, completed=false) {
+        let task = new Todo(this.currentId, title, description, dueDate, priority, notes, completed);
         this.todos.push(task);
         this.currentId++;
     };

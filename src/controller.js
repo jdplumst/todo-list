@@ -4,7 +4,12 @@ export default class Controller {
     constructor(view) {
         this.view = view;
         this.time = 'all';
-        this.projects = [];
+        this.projectsLocal = JSON.parse(localStorage.getItem('projects')) || [];
+
+        this.projects = this.retrieveLocalObjects();
+
+        // Display all saved projects in local storage and their todos
+        this.refresh();
         
         // Create new project when new project button is clicked
         this.view.addProjectBtn.addEventListener('click', () => {
@@ -20,6 +25,7 @@ export default class Controller {
             let todos = project.getTodos();
             this.view.clearProjectInput();
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
+            localStorage.setItem('projects', JSON.stringify(this.projects));
         });
 
         // Delete currently displayed project when delete project button clicked
@@ -29,6 +35,12 @@ export default class Controller {
             let classProjectTitle = projectTitle.replace(/\s+/g, '-');
             this.view.deleteElement(`option.${CSS.escape(classProjectTitle)}`);
             this.projects = this.projects.filter(project => project.title !== projectTitle);
+            localStorage.setItem('projects', JSON.stringify(this.projects));
+            projectTitle = this.view.getElement('select').value;
+            let project = this.getProject(projectTitle);
+            let todos = project.getTodos();
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
+            this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
         });
 
         // Display form to create new todo
@@ -62,7 +74,7 @@ export default class Controller {
                 } else if (todoData[5]) {
                     project.addTodo(todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
                 }
-                
+                localStorage.setItem('projects', JSON.stringify(this.projects));
             // Edit existing todo item
             } else if (event.target.className === 'edit-task-submit') {
                 if (todoData[3]) {
@@ -72,6 +84,7 @@ export default class Controller {
                 } else if (todoData[5]) {
                     project.editTodo(todoData[7], todoData[0], todoData[1], todoData[2], 'high', todoData[6]);
                 }
+                localStorage.setItem('projects', JSON.stringify(this.projects));
             }
             this.view.hideModal();
             // Get list of todos for currently displayed project and sort them by date
@@ -89,6 +102,7 @@ export default class Controller {
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
             this.view.toggleDateButton(this.time);
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -100,6 +114,7 @@ export default class Controller {
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
             this.view.toggleDateButton(this.time);
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -111,6 +126,7 @@ export default class Controller {
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
             this.view.toggleDateButton(this.time);
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -122,6 +138,7 @@ export default class Controller {
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
             this.view.toggleDateButton(this.time);
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -130,6 +147,7 @@ export default class Controller {
             let projectTitle = this.view.getElement('select').value;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
+            todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -155,14 +173,18 @@ export default class Controller {
                 let projectTitle = this.view.getElement('select').value;
                 let project = this.getProject(projectTitle);
                 project.completeTodo(todoId);
+                localStorage.setItem('projects', JSON.stringify(this.projects));
                 let todos = project.getTodos();
+                todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             } else if (target.className === 'delete-task') {
                 let todoId = target.parentNode.getAttribute('todo-id');
                 let projectTitle = this.view.getElement('select').value;
                 let project = this.getProject(projectTitle);
                 project.deleteTodo(todoId);
+                localStorage.setItem('projects', JSON.stringify(this.projects));
                 let todos = project.getTodos();
+                todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             }
         });
@@ -204,4 +226,33 @@ export default class Controller {
         end = end.toISOString().substring(0,10);
         return todos.filter(todo => todo.dueDate >= today && todo.dueDate <= end);
     };
+
+    // Re create all the objects in local storage so that they have their methods
+    retrieveLocalObjects() {
+        let projects = [];
+        for (let i = 0; i < this.projectsLocal.length; i++) {
+            let project = new Project(this.projectsLocal[i].title);
+            for (let j = 0; j < this.projectsLocal[i].todos.length; j++) {
+                project.addTodo(this.projectsLocal[i].todos[j].title,
+                                this.projectsLocal[i].todos[j].description,
+                                this.projectsLocal[i].todos[j].dueDate,
+                                this.projectsLocal[i].todos[j].priority,
+                                this.projectsLocal[i].todos[j].notes,
+                                this.projectsLocal[i].todos[j].completed);
+            }
+            projects.push(project);
+        }
+        return projects;
+    };
+
+    // Display all saved projects in local storage and their todos
+    refresh() {
+        this.view.displayAllProjects(this.projects, 'option');
+        let projectTitle = this.view.getElement('select').value;
+        if (projectTitle === '') return;
+        let project = this.getProject(projectTitle);
+        let todos = project.getTodos();
+        this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
+    };  
+
 };

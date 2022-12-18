@@ -70,6 +70,12 @@ export default class View {
         project.selected = true;
     };
 
+    displayAllProjects(projects, tag, className='') {
+        for (let i = 0; i < projects.length; i++) {
+            this.displayNewProject(projects[i].title, tag, className);
+        }
+    };
+
     toggleDateButton(time) {
         if (time === 'all') {
             this.showAllBtn.classList.add('button-active');
