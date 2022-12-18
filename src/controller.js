@@ -88,6 +88,7 @@ export default class Controller {
             if (projectTitle === '') return;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
+            this.view.toggleDateButton(this.time);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -98,6 +99,7 @@ export default class Controller {
             if (projectTitle === '') return;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
+            this.view.toggleDateButton(this.time);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -108,6 +110,7 @@ export default class Controller {
             if (projectTitle === '') return;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
+            this.view.toggleDateButton(this.time);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 
@@ -118,6 +121,7 @@ export default class Controller {
             if (projectTitle === '') return;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
+            this.view.toggleDateButton(this.time);
             this.view.displayTodos(this.getFilteredTodoDates(todos, this.time)); 
         });
 

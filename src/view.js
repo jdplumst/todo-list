@@ -69,6 +69,30 @@ export default class View {
         project.selected = true;
     };
 
+    toggleDateButton(time) {
+        if (time === 'all') {
+            this.showAllBtn.classList.add('button-active');
+            this.showWeekBtn.classList.remove('button-active');
+            this.showMonthBtn.classList.remove('button-active');
+            this.showYearBtn.classList.remove('button-active');
+        } else if (time === 'week') {
+            this.showAllBtn.classList.remove('button-active');
+            this.showWeekBtn.classList.add('button-active');
+            this.showMonthBtn.classList.remove('button-active');
+            this.showYearBtn.classList.remove('button-active');
+        } else if (time === 'month') {
+            this.showAllBtn.classList.remove('button-active');
+            this.showWeekBtn.classList.remove('button-active');
+            this.showMonthBtn.classList.add('button-active');
+            this.showYearBtn.classList.remove('button-active');
+        } else if (time === 'year') {
+            this.showAllBtn.classList.remove('button-active');
+            this.showWeekBtn.classList.remove('button-active');
+            this.showMonthBtn.classList.remove('button-active');
+            this.showYearBtn.classList.add('button-active');
+        }
+    };
+
     // Displays modal for todo to add
     displayNewModal() {
         this.modal.style.display = 'block';
