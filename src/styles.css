@@ -15,6 +15,7 @@ h1 {
 
 .projects {
     width: 20%;
+    text-align: center;
 }
 
 .tasks {
@@ -31,6 +32,36 @@ select {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+}
+
+.add-project,
+.delete-project,
+.projects-input,
+select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.add-project,
+.delete-project,
+.projects-input {
+    height: 30px;
+}
+
+.projects-input {
+    box-sizing: border-box;
+}
+
+.add-project {
+    background-color: #22c55e;
+    color: white;
+    border: 1px solid #22c55e;
+}
+
+.delete-project {
+    background-color: #ef4444;
+    color: white;
+    border: 1px solid #ef4444;
 }
 
 /* Tasks Grid */
