@@ -177,6 +177,7 @@ export default class Controller {
                 let todos = project.getTodos();
                 todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
+            // Delete todo
             } else if (target.className === 'delete-task') {
                 let todoId = target.parentNode.getAttribute('todo-id');
                 let projectTitle = this.view.getElement('select').value;
@@ -186,6 +187,18 @@ export default class Controller {
                 let todos = project.getTodos();
                 todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
+            // Display full details of todo when clicked on
+            } else if (target.parentNode.className === 'item' || target.className === 'item') {
+                let todoId;
+                if (target.parentNode.className === 'item') {
+                    todoId = target.parentNode.getAttribute('todo-id');
+                } else {
+                    todoId = target.getAttribute('todo-id');
+                }
+                let projectTitle = this.view.getElement('select').value;
+                let project = this.getProject(projectTitle);
+                let todo = project.getTodo(todoId);
+                this.view.displayFullTodo(todo)
             }
         });
     };
@@ -231,7 +244,7 @@ export default class Controller {
     retrieveLocalObjects() {
         let projects = [];
         for (let i = 0; i < this.projectsLocal.length; i++) {
-            let project = new Project(this.projectsLocal[i].title);
+            let project = new Project(this.projectsLocal[i].title, this.projectsLocal[i].currentId);
             for (let j = 0; j < this.projectsLocal[i].todos.length; j++) {
                 project.addTodo(this.projectsLocal[i].todos[j].title,
                                 this.projectsLocal[i].todos[j].description,

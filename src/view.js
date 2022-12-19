@@ -152,9 +152,51 @@ export default class View {
         return todoData;
     };
 
+    // Displays full details of a single todo
+    displayFullTodo(todo) {
+        this.tasksList.innerHTML = '';
+        this.tasksList.classList.remove('tasks-list');
+        let todoItem = this.createElement('div', 'full-item-container');
+        todoItem.setAttribute('todo-id', todo.id);
+        let todoItemTitle = this.createElement('h2');
+        todoItemTitle.innerText = todo.title;
+        todoItem.appendChild(todoItemTitle);
+        let todoItemDescription = this.createElement('p', 'full-item');
+        todoItemDescription.innerText = todo.description;
+        console.log(todo.description);
+        todoItem.appendChild(todoItemDescription);
+        let todoItemDueDate = this.createElement('p', 'full-item');
+        todoItemDueDate.innerText = todo.dueDate;
+        todoItem.appendChild(todoItemDueDate);
+        let todoItemPriority = this.createElement('p', 'full-item');
+        if (todo.priority === 'low') {
+            todoItem.style.backgroundColor = '#22c55e';
+            todoItemPriority.innerText = 'Priority: Low';
+        } else if (todo.priority === 'medium') {
+            todoItem.style.backgroundColor = '#f97316';
+            todoItemPriority.innerText = 'Priority: Medium';
+        } else if (todo.priority === 'high') {
+            todoItem.style.backgroundColor = '#ef4444';
+            todoItemPriority.innerText = 'Priority: High';
+        }
+        todoItem.appendChild(todoItemPriority);
+        let todoItemNotes = this.createElement('p', 'full-item');
+        todoItemNotes.innerText = todo.notes;
+        todoItem.appendChild(todoItemNotes);
+        let todoItemCompleted = this.createElement('p', 'full-item');
+        if (todo.completed) {
+            todoItemCompleted.innerText = 'Completed: Yes';
+        } else {
+            todoItemCompleted.innerText = 'Completed: No';
+        }
+        todoItem.appendChild(todoItemCompleted);
+        this.tasksList.appendChild(todoItem);
+    };
+
     // Displays todos in grid
     displayTodos(todos) {
         this.tasksList.innerHTML = '';
+        this.tasksList.classList.add('tasks-list');
         if (this.showCompletedCheckbox.checked === false) {
             todos = todos.filter(todo => todo.completed === false);
         }

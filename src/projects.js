@@ -1,10 +1,10 @@
 import Todo from "./todo";
 
 export default class Project {
-    constructor(title) {
+    constructor(title, currentId=0) {
         this.title = title;
         this.todos = [];
-        this.currentId = 0; // Current id value to be given to new todo
+        this.currentId = currentId; // Current id value to be given to new todo
     };
 
     // Add new todo to project
