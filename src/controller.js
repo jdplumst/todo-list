@@ -187,6 +187,13 @@ export default class Controller {
                 let todos = project.getTodos();
                 todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
+            // Go back to list view from todo details view
+            } else if (target.className === 'back-btn') {
+                let projectTitle = this.view.getElement('select').value;
+                let project = this.getProject(projectTitle);
+                let todos = project.getTodos();
+                todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
+                this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
             // Display full details of todo when clicked on
             } else if (target.parentNode.className === 'item' || target.className === 'item') {
                 let todoId;

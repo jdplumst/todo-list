@@ -118,13 +118,17 @@ select {
 .full-item-container {
     min-height: 100%;
     padding: 5px;
+    position: relative;
 }
 
 .full-item,
 .full-item-container {
     width: 50vw;
-    /* overflow: hidden; */
-    /* border: 1px solid black; */
+}
+
+.back-btn {
+    position: absolute;
+    top: 10px;
 }
 
 .item {
@@ -147,7 +151,8 @@ img {
 
 .edit-task,
 .complete-task,
-.delete-task {
+.delete-task,
+.back-btn {
     cursor: pointer;
 }
 

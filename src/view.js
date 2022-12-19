@@ -1,6 +1,7 @@
 import Pencil from './img/pencil.svg';
 import Check from './img/check-bold.svg';
 import Delete from './img/delete.svg';
+import Arrow from './img/arrow-left.svg';
 
 export default class View {
     constructor() {
@@ -158,12 +159,15 @@ export default class View {
         this.tasksList.classList.remove('tasks-list');
         let todoItem = this.createElement('div', 'full-item-container');
         todoItem.setAttribute('todo-id', todo.id);
+        this.backBtn = new Image();
+        this.backBtn.src = Arrow;
+        this.backBtn.classList.add('back-btn');
+        todoItem.appendChild(this.backBtn);
         let todoItemTitle = this.createElement('h2');
         todoItemTitle.innerText = todo.title;
         todoItem.appendChild(todoItemTitle);
         let todoItemDescription = this.createElement('p', 'full-item');
         todoItemDescription.innerText = todo.description;
-        console.log(todo.description);
         todoItem.appendChild(todoItemDescription);
         let todoItemDueDate = this.createElement('p', 'full-item');
         todoItemDueDate.innerText = todo.dueDate;
