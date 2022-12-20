@@ -37,6 +37,7 @@ export default class Controller {
             this.projects = this.projects.filter(project => project.title !== projectTitle);
             localStorage.setItem('projects', JSON.stringify(this.projects));
             projectTitle = this.view.getElement('select').value;
+            if (projectTitle === '') return;
             let project = this.getProject(projectTitle);
             let todos = project.getTodos();
             todos.sort((a,b) => (a.dueDate > b.dueDate) ? 1 : (b.dueDate > a.dueDate) ? -1: 0);
@@ -157,6 +158,7 @@ export default class Controller {
             // Display todo list for selected project
             if (target.tagName === 'SELECT') {
                 let projectTitle = this.view.getElement('select').value;
+                if (projectTitle === '') return;
                 let project = this.getProject(projectTitle);
                 let todos = project.getTodos();
                 this.view.displayTodos(this.getFilteredTodoDates(todos, this.time));
